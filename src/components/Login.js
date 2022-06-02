@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Login({ handleLogin }) {
 
@@ -26,38 +26,38 @@ export default function Login({ handleLogin }) {
     }
 
     return (
-        <div className='login'>
-            <h3 className='login__title'>Вход</h3>
-            <form className='login__form' onSubmit={handleSubmit}>
-                <label className='login__form-field'>
-                    <input className='login__input login__input_email'
-                        type='email'
-                        placeholder='Email'
-                        name='email'
+        <div className="login">
+            <h3 className="login__title">Вход</h3>
+            <form className="login__form" onSubmit={handleSubmit}>
+                <label className="login__form-field">
+                    <input className="login__input login__input_email"
+                        type="email"
+                        placeholder="Email"
+                        name="email"
                         onChange={handleChange}
                         value={values.email}
                         required />
                 </label>
                 <span
-                    id='error-login-email'
-                    className='login__error'>
+                    id="error-login-email"
+                    className="login__error">
                 </span>
-                <label className='login__form-field'>
-                    <input className='login__input login__input_password'
-                        type='password'
-                        placeholder='Пароль'
-                        name='password'
+                <label className="login__form-field">
+                    <input className="login__input login__input_password"
+                        type="password"
+                        placeholder="Пароль"
+                        name="password"
                         onChange={handleChange}
                         value={values.password}
                         required />
                 </label>
                 <span
-                    id='error-login-email'
-                    className='login__error'>
+                    id="error-login-email"
+                    className="login__error">
                 </span>
-                <button className='login__submit' type='submit'>Войти</button>
+                <button className="login__submit" type="submit">Войти</button>
             </form>
-            <p className='register__signin'>Еще нет личного аккаунта? <Link to='/signup' className='register__signin_link'>Зарегистрироваться</Link></p>
+            <p className="register__signin">Еще нет личного аккаунта? <Link to="/signup" className="register__signin_link">Зарегистрироваться</Link></p>
         </div>
     );
 }
