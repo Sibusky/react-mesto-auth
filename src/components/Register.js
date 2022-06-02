@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function Register({ handleRegister }) {
 
@@ -29,35 +29,43 @@ export default function Register({ handleRegister }) {
         <div className="register">
             <h3 className="register__title">Регистрация</h3>
             <form className="register__form" onSubmit={handleSubmit}>
-                <label className="register__form_field">
-                    <input
-                        className="register__input register__input_email"
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        onChange={handleChange}
-                        value={values.email}
-                        required
-                    />
-                </label>
-                <span id="error-register-email" className="register__error"></span>
-
-                <label className="register__form-field">
-                    <input
-                        className="register__input register__input_password"
-                        type="password"
-                        placeholder="Пароль"
-                        name="password"
-                        onChange={handleChange}
-                        value={values.password}
-                        required
-                    />
-                </label>
-                <span id="error-register-email" className="register__error"></span>
-                <button className="register__submit" type="submit">Зарегистрироваться</button>
+                <fieldset className="register__form-fieldset">
+                    <ul className="register__input-list">
+                        <li className="register__input-item">
+                            <input
+                                className="register__input"
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                onChange={handleChange}
+                                value={values.email}
+                                required />
+                            <span
+                                id="error-register-email"
+                                className="register__error">
+                            </span>
+                        </li>
+                        <li className="register__input-item">
+                            <input
+                                className="register__input"
+                                type="password"
+                                placeholder="Пароль"
+                                name="password"
+                                onChange={handleChange}
+                                value={values.password}
+                                required />
+                            <span
+                                id="error-register-email"
+                                className="register__error">
+                            </span>
+                        </li>
+                    </ul>
+                </fieldset>
+                <button className="register__submit-button" type="submit">Зарегистрироваться</button>
             </form>
-            <p className="register__signin">Уже зарегистрированы? <Link to="/signin" className="register__signin_link">Войти</Link></p>
+            <p className="register__signin">Уже зарегистрированы? 
+            {/* <Link to="/signin" className="link">Войти</Link> */}
+            </p>
         </div>
     );
-
 }

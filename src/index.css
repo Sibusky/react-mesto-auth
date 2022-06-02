@@ -60,125 +60,43 @@
 @import url(./blocks/popup/__image-container/popup__image-container.css);
 @import url(./blocks/popup/__image/popup__image.css);
 @import url(./blocks/button/button.css);
+@import url(./blocks/login/login.css);
+@import url(./blocks/login/__form-fieldset/login__form-fieldset.css);
+@import url(./blocks/login/__input-list/login__input-list.css);
+@import url(./blocks/login/__input-item/login__input-item.css);
+@import url(./blocks/login/__input/login__input.css);
+@import url(./blocks/login/__submit-button/login__submit-button.css);
+@import url(./blocks/link/link.css);
+@import url(./blocks/register/register.css);
+@import url(./blocks/register/__signin/register__signin.css);
+@import url(./blocks/register/__title/register__title.css);
+@import url(./blocks/register/__form-fieldset/register__form-fieldset.css);
+@import url(./blocks/register/__input-list/register__input-list.css);
+@import url(./blocks/register/__input-item/register__input-item.css);
+@import url(./blocks/register/__input/register__input.css);
+@import url(./blocks/register/__submit-button/register__submit-button.css);
 
 
-.login {
-    margin: 0 auto;
-    padding: 60px 0;
-    max-width: 358px;
-}
 
-.login__title {
-    font-family: 'Inter', Arial, sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 1;
-    text-rendering: optimizeLegibility;
-    text-decoration: none;
-    color: #fff;
-    width: 100%;
-    padding: 0;
-    margin: 0 0 50px;
-    text-align: center;
-}
 
-.login__form {
 
-}
 
-.login__form-fieldset {
-    padding: 0;
-    margin: 0;
-    border: none;
-    max-width: 358px;
-}
 
-.login__input-list{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
 
-.login__input-item {
-    padding: 0;
-    margin: 0 0 30px;
-}
 
-.login__input-item:last-of-type {
-    margin-bottom: 216px;
-}
 
-.login__input {
-    font-family: 'Inter', Arial, sans-serif;
-    font-style:  normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1;
-    text-rendering: optimizeLegibility;
-    text-decoration: none;
-    background: none;
-    color: #ccc;
-    width: 100%;
-    padding: 0 0 8px;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid #ccc;
-}
 
-.login__input:focus {
-    outline: none;
-  }
 
-.login__error {
 
-}
 
-.login__submit-button {
-    border: none;
-    border-radius: 2px;
-    background-color: #fff;
-    font-family: 'Inter', Arial, sans-serif;
-    font-style:  normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1;
-    text-rendering: optimizeLegibility;
-    text-decoration: none;
-    color: #000;
-    width: 358px;
-    height: 50px;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    opacity: 1;
-    transition: opacity ease-in-out .2s;
-}
 
-.login__submit-button:hover {
-    opacity: .8;
-}
 
-.register__signin {
-    font-family: 'Inter', Arial, sans-serif;
-    font-style:  normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1;
-    text-rendering: optimizeLegibility;
-    text-decoration: none;
-    color: #fff;
-    width: 100%;
-    padding: 0;
-    margin: 15px 0 0;
-    text-align: center;
-}
 
-.link {
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-}
 
-.link:hover {
-    opacity: 0.6;
-}
+
+
+
+
+.login__error {}
+
+.register__error {}
