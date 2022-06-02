@@ -3,6 +3,10 @@
 @import url(./blocks/page/page.css);
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__img/header__img.css);
+@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__link/_logout/header__link_logout.css);
+@import url(./blocks/header/__email/header__email.css);
 @import url(./blocks/container/container.css);
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__avatar/profile__avatar.css);
@@ -60,6 +64,8 @@
 @import url(./blocks/popup/__image-title/popup__image-title.css);
 @import url(./blocks/popup/__image-container/popup__image-container.css);
 @import url(./blocks/popup/__image/popup__image.css);
+@import url(./blocks/popup/__infotooltip-img/popop__infotooltip-img.css);
+@import url(./blocks/popup/__caption/popup__caption.css);
 @import url(./blocks/button/button.css);
 @import url(./blocks/login/login.css);
 @import url(./blocks/login/__form-fieldset/login__form-fieldset.css);
@@ -81,23 +87,6 @@
 
 
 
-.popop__infotooltip-img {
-    max-width: 120px;
-}
-
-.popup__caption {
-    font-family: 'Inter', Arial, sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 1;
-    text-rendering: optimizeLegibility;
-    text-decoration: none;
-    color: #000;
-    width: 100%;
-    padding: 0;
-    margin: 0 0 60px;
-}
 
 
 
