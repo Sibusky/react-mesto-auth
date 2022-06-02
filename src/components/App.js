@@ -9,7 +9,8 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 // import Login from './Login';
-import Register from './Register';
+// import Register from './Register';
+// import InfoTooltip from './InfoTooltip';
 
 function App() {
 
@@ -144,7 +145,9 @@ function App() {
 
         {/* <Login /> */}
 
-        <Register />
+        {/* <Register /> */}
+        
+        {/* <InfoTooltip /> */}
 
         <Main onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
