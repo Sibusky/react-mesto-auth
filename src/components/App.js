@@ -8,6 +8,7 @@ import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import Login from './Login';
 
 function App() {
 
@@ -139,6 +140,8 @@ function App() {
       <div className="page">
 
         <Header />
+
+        <Login />
 
         <Main onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
