@@ -13,7 +13,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import Login from './Login';
 import Register from './Register';
-import InfoToolTip from './InfoToolTip';
+import InfoTooltip from './InfoTooltip';
 
 import registrationSucsessImg from '../images/registration-sucsess.svg';
 import registrationFailImg from '../images/registration-fail.svg';
@@ -33,10 +33,10 @@ function App() {
     email: ""
   });
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isInfoTooltipMessage, setIsInfoTooltipMessage] = useState({
     image: "",
-    text: ""
+    caption: ""
   });
 
   const history = useHistory();
@@ -45,8 +45,6 @@ function App() {
   useEffect(() => {
     handleCheckToken();
   }, []);
-
-
 
   // Получаю данные пользователя и карточек
   useEffect(() => {
@@ -68,9 +66,9 @@ function App() {
         })
         .catch(err => console.log(`Ошибка: ${err}`))
 
-      // history.push("/"); // Если всё хорошо, то перехожу на начальную страницу с карточками
+      history.push("/"); // Если всё хорошо, то перехожу на начальную страницу с карточками
     }
-  }, [loggedIn])
+  }, [loggedIn, history])
 
   // Функции для изменения состояния переменных (аватар, имя профиля, описание профиля, клинутая карточка)
   const handleEditAvatarClick = () => {
@@ -94,6 +92,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false)
+    setIsInfoTooltipOpen(false)
     setSelectedCard(null)
   }
 
@@ -126,15 +125,6 @@ function App() {
       })
       .catch(err => console.log(`Ошибка: ${err}`))
   }
-
-  // Хук загрузки начальных карточек на страницу
-  // React.useEffect(() => {
-  //   api.getInitialCards()
-  //     .then((cardList) => {
-  //       setCards(cardList)
-  //     })
-  //     .catch(err => console.log(`Ошибка: ${err}`))
-  // }, []);
 
   // Функция для установки лайка
   function handleCardLike(card) {
@@ -172,8 +162,6 @@ function App() {
       .catch(err => console.log(`Ошибка: ${err}`))
   }
 
-
-  // Разобраться
   // Функция регистрации пользователя
   function handleRegister({ email, password }) {
     return Auth.register(email, password)
@@ -182,7 +170,7 @@ function App() {
         setUserData({ ...userData, email });
         setIsInfoTooltipMessage({
           image: registrationSucsessImg,
-          text: "Вы успешно зарегистрировались!",
+          caption: "Вы успешно зарегистрировались!",
         });
         history.push("/signin");
       })
@@ -190,11 +178,11 @@ function App() {
         console.log(`Ошибка...: ${err}`);
         setIsInfoTooltipMessage({
           image: registrationFailImg,
-          text: "Что-то пошло не так! Попробуйте ещё раз.",
+          caption: "Что-то пошло не так! Попробуйте ещё раз.",
         });
       })
       .finally(() => {
-        setIsInfoToolTipOpen(true);
+        setIsInfoTooltipOpen(true);
       });
   }
 
@@ -207,16 +195,16 @@ function App() {
 
           handleCheckToken();
 
-          history.push("/");
+          history.push("/"); // Если данные ещё есть в localstorage, пользователь переходит на главную
         }
       })
       .catch((err) => {
         console.log(`Ошибка...: ${err}`);
         setIsInfoTooltipMessage({
           image: registrationFailImg,
-          text: "Неверный email или пароль. Попробуйте ещё раз.",
+          caption: "Неверный email или пароль. Попробуйте ещё раз.",
         });
-        setIsInfoToolTipOpen(true);
+        setIsInfoTooltipOpen(true);
       });
   }
 
@@ -229,7 +217,6 @@ function App() {
           const { _id, email } = res.data;
           setLoggedIn(true);
           setUserData({ _id, email });
-          //history.push('/');
         })
         .catch((err) => {
           console.log(`Ошибка...: ${err}`);
@@ -244,7 +231,6 @@ function App() {
     setUserData({ _id: "", email: "" });
     history.push("/signin");
   }
-
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
@@ -302,12 +288,13 @@ function App() {
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
         {/* Попап регистрации или логина */}
-        <InfoToolTip
-          isOpen={isInfoToolTipOpen}
+        <InfoTooltip
+          name="infotooltip"
+          isOpen={isInfoTooltipOpen}
           onClose={closeAllPopups}
           image={isInfoTooltipMessage.image}
-          text={isInfoTooltipMessage.text}   >
-        </InfoToolTip>
+          caption={isInfoTooltipMessage.caption}   >
+        </InfoTooltip>
 
       </div>
 

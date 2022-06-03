@@ -86,20 +86,3 @@
 @import url(./blocks/register/__input-item/register__input-item.css);
 @import url(./blocks/register/__input/register__input.css);
 @import url(./blocks/register/__submit-button/register__submit-button.css);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.login__error {}
-
-.register__error {}
