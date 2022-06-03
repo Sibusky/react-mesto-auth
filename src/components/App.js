@@ -1,4 +1,7 @@
-import React, { useState, } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import * as Auth from '../utils/Auth.js';
+import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext, } from '../context/CurrentUserContext';
 import { api } from '../utils/api.js'
 import Header from './Header'
@@ -8,9 +11,12 @@ import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
-// import Login from './Login';
-// import Register from './Register';
-// import InfoTooltip from './InfoTooltip';
+import Login from './Login';
+import Register from './Register';
+import InfoToolTip from './InfoToolTip';
+
+import registrationSucsessImg from '../images/registration-sucsess.svg';
+import registrationFailImg from '../images/registration-fail.svg';
 
 function App() {
 
@@ -22,19 +28,49 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
-  // Получаю данные пользователя
-  React.useEffect(() => {
-    api.getProfile()
-      .then((userData) => {
-        setCurrentUser({
-          name: userData.name,
-          about: userData.about,
-          avatar: userData.avatar,
-          id: userData._id
+  const [userData, setUserData] = useState({
+    _id: "",
+    email: ""
+  });
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false);
+  const [isInfoTooltipMessage, setIsInfoTooltipMessage] = useState({
+    image: "",
+    text: ""
+  });
+
+  const history = useHistory();
+
+  // Проверяю выполнял ли пользователь вход ранее
+  useEffect(() => {
+    handleCheckToken();
+  }, []);
+
+
+
+  // Получаю данные пользователя и карточек
+  useEffect(() => {
+    if (loggedIn) {
+      api.getProfile() // Загружаю данные пользователья
+        .then((userData) => {
+          setCurrentUser({
+            name: userData.name,
+            about: userData.about,
+            avatar: userData.avatar,
+            id: userData._id
+          })
         })
-      })
-      .catch(err => console.log(`Ошибка: ${err}`))
-  }, [])
+        .catch(err => console.log(`Ошибка: ${err}`))
+
+      api.getInitialCards() // Загружаю данные карточек
+        .then((cardList) => {
+          setCards(cardList)
+        })
+        .catch(err => console.log(`Ошибка: ${err}`))
+
+      // history.push("/"); // Если всё хорошо, то перехожу на начальную страницу с карточками
+    }
+  }, [loggedIn])
 
   // Функции для изменения состояния переменных (аватар, имя профиля, описание профиля, клинутая карточка)
   const handleEditAvatarClick = () => {
@@ -92,13 +128,13 @@ function App() {
   }
 
   // Хук загрузки начальных карточек на страницу
-  React.useEffect(() => {
-    api.getInitialCards()
-      .then((cardList) => {
-        setCards(cardList)
-      })
-      .catch(err => console.log(`Ошибка: ${err}`))
-  }, []);
+  // React.useEffect(() => {
+  //   api.getInitialCards()
+  //     .then((cardList) => {
+  //       setCards(cardList)
+  //     })
+  //     .catch(err => console.log(`Ошибка: ${err}`))
+  // }, []);
 
   // Функция для установки лайка
   function handleCardLike(card) {
@@ -136,26 +172,120 @@ function App() {
       .catch(err => console.log(`Ошибка: ${err}`))
   }
 
+
+  // Разобраться
+  // Функция регистрации пользователя
+  function handleRegister({ email, password }) {
+    return Auth.register(email, password)
+      .then((res) => {
+        const { email } = res.data;
+        setUserData({ ...userData, email });
+        setIsInfoTooltipMessage({
+          image: registrationSucsessImg,
+          text: "Вы успешно зарегистрировались!",
+        });
+        history.push("/signin");
+      })
+      .catch((err) => {
+        console.log(`Ошибка...: ${err}`);
+        setIsInfoTooltipMessage({
+          image: registrationFailImg,
+          text: "Что-то пошло не так! Попробуйте ещё раз.",
+        });
+      })
+      .finally(() => {
+        setIsInfoToolTipOpen(true);
+      });
+  }
+
+  // Функция входа на сайт
+  function handleLogin({ email, password }) {
+    return Auth.authorize(email, password)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+
+          handleCheckToken();
+
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка...: ${err}`);
+        setIsInfoTooltipMessage({
+          image: registrationFailImg,
+          text: "Неверный email или пароль. Попробуйте ещё раз.",
+        });
+        setIsInfoToolTipOpen(true);
+      });
+  }
+
+  // Функция проверки токена
+  function handleCheckToken() {
+    if (localStorage.getItem("jwt")) {
+      let jwt = localStorage.getItem("jwt");
+      Auth.getContent(jwt)
+        .then((res) => {
+          const { _id, email } = res.data;
+          setLoggedIn(true);
+          setUserData({ _id, email });
+          //history.push('/');
+        })
+        .catch((err) => {
+          console.log(`Ошибка...: ${err}`);
+        });
+    }
+  }
+
+  // Функция выхода пользователя
+  function handleLogOut() {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    setUserData({ _id: "", email: "" });
+    history.push("/signin");
+  }
+
+
   return (
     <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
 
       <div className="page">
 
-        <Header />
+        <Header
+          userData={userData}
+          handleLogOut={handleLogOut} />
 
-        {/* <Login /> */}
+        <Switch>
 
-        {/* <Register /> */}
-        
-        {/* <InfoTooltip /> */}
+          <ProtectedRoute
+            exact
+            path="/"
+            loggedIn={loggedIn}
+            component={Main}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+            cards={cards}>
+          </ProtectedRoute>
 
-        <Main onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete} />
+          <Route path="/signup">
+            <Register handleRegister={handleRegister} />
+          </Route>
+
+          <Route path="/signin">
+            <Login handleLogin={handleLogin} />
+          </Route>
+
+          <Route>
+            {loggedIn
+              ? <Redirect to="/" />
+              : <Redirect to="/signin" />}
+          </Route>
+
+        </Switch>
 
         <Footer />
 
@@ -170,6 +300,14 @@ function App() {
 
         {/* Попап открытия изображения карточки */}
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+        {/* Попап регистрации или логина */}
+        <InfoToolTip
+          isOpen={isInfoToolTipOpen}
+          onClose={closeAllPopups}
+          image={isInfoTooltipMessage.image}
+          text={isInfoTooltipMessage.text}   >
+        </InfoToolTip>
 
       </div>
 

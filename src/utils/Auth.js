@@ -32,3 +32,15 @@ export function authorize(email, password) {
     })
         .then(checkResponse)
 };
+
+// Получаю токен
+export function getContent(token) {
+    return fetch(`${BASE_URL}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    })
+    .then(checkResponse)
+  }

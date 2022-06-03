@@ -21,7 +21,7 @@ export default function Header({ userData, handleLogOut }) {
 
             <Route exact path='/'>
                 <p className='header__email'>{userData.email}</p>
-                <Link className='header__link link' to='/signin' onClick={handleLogOut} >Выйти</Link>
+                <Link className='header__link header__link_logout link' to='/signin' onClick={handleLogOut} >Выйти</Link>
             </Route>
 
         </header>

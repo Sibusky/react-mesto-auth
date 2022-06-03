@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Register({ handleRegister }) {
 
@@ -64,7 +64,7 @@ export default function Register({ handleRegister }) {
                 <button className="register__submit-button" type="submit">Зарегистрироваться</button>
             </form>
             <p className="register__signin">Уже зарегистрированы? 
-            {/* <Link to="/signin" className="link">Войти</Link> */}
+            <Link to="/signin" className="register__signin-link link">&nbsp;Войти</Link>
             </p>
         </div>
     );

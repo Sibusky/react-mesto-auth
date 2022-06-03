@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login({ handleLogin }) {
 
@@ -61,8 +61,8 @@ export default function Login({ handleLogin }) {
                 </fieldset>
                 <button className="login__submit-button" type="submit">Войти</button>
             </form>
-            <p className="register__signin">Нет аккаунта? 
-            {/* <Link to="/signup" className="link">Зарегистрироваться</Link> */}
+            <p className="login__signup">Нет аккаунта? 
+            <Link to="/signup" className="login__signup-link link">&nbsp;Зарегистрироваться</Link>
             </p>
         </div>
     )
