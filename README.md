@@ -1,23 +1,34 @@
-# Проект: Место-React-Auth
+# Mesto. React-Auth
+
+## Project work after twelve sprints in the course “Web-developer” from Yandex.Practicum
+
+This project is an evolution of previous work _Mesto_ created using **JavaScript** with **React** library.   
+[Previous project code link](https://github.com/Sibusky/mesto-react).    
+[Previous project GitHub Pages link](https://sibusky.github.io/mesto-react/index.html).   
+Evolution is in realizing registration and authorization functions.   
+
+### Registration and authorization details:
+- access to app functionality is allowed for authorized users;
+- there are two additional routes for unauthorized users: “/sign-up” - for user registration, “/sign-in” - for user authorization;
+- token goes to localStorage so in case of user’s repeated visit it’s not necessarily to pass authorization one more time.
+
+### GitHub Pages link:
+
+https://sibusky.github.io/react-mesto-auth/index.html
+
+# Место. React-Auth
 
 ## Проектная работа по итогам двенадцати спринтов в Яндекс.Практикуме в курсе "Веб-разработчик".
 
-Проект представляет собой одностраничный сайт с  карточками природных достопримечательностей России, а также профиль пользователя, добавившего их. Макет адаптивный и принимает удобный вид на всех разрешениях от 320 px до 1280 px. Также присутсвует анимация кнопок при наведении курсора. Окна попапов открываются и закрываются плавно. Это реализовано на свойствах **CSS** _visibility_, _opacity_ и _transition_.
+Данный проект является доработкой предыдущего проекта _Mesto_, написанного на **JavaScript** с использованием библиотеки **React**.   
+[Ссылка на код предыдущего проекта](https://github.com/Sibusky/mesto-react).  
+[Ссылка на GitHub Pages предыдущего проекта](https://sibusky.github.io/mesto-react/index.html).   
+Доработка заключается в реализации функции регистрации и авторизации.
 
-### Проект реализован с использованием знаний по HTML, CSS, JavaScript, React. В работе были использована информация темам:
-
-- флексбокс-вёрстка,
-- Grid Layouts,
-- позиционирование элементов,
-- **БЭМ** (файловая структура, правильное наименование, миксование),
-- **Git**,
-- **GitHub**,
-- анимация при наведении курсора,
-- Адаптивная и "резиновая" вёрстка сайтов,
-- **JavaScript**,
-- **Библиотека React** (функциональные компоненты, хуки, создание и подключение контекста, поднятие стейта, управляемые компоненты, рефы),
-- работа с Back-end и удалённым сервером (fetch-запросы: GET, PATCH, POST, DELETE, PUT, авторизация и регистрация пользователя),
-- работа с макетом, свёрстанным в редакторе Figma.
+### Особенности регистрации и авторизации:
+- функциональность приложения доступна только авторизованным пользователям по роуту “/”;
+- для неавторизованных пользователей реализованы два дополнительных роута: “/sign-up” - для регистрации пользователя, “/sign-in” - для авторизации пользователя;
+- токен хранится в localStorage, при повторном визите пользователь не должен вновь проходить авторизацию.
 
 ### Ссылка на GitHub Pages:
 
